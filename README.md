@@ -16,11 +16,13 @@ HLA<gene>*<allele_group>:<specific_HLA_protein>
 
 ## Installation
 ### Environment
-Create a python 3.11 environment and install the requirements:
+Clone this repo and create a python 3.11 environment and install the requirements:
 ```bash
 conda create -n seq2hla python=3.11
 conda activate seq2hla
+# Make sure you are in this repo folder
 pip install -r requirements.txt
+python setup.py install
 ```
 Make sure your computer has installed Blast tools. If not, you can install it by:
 ```bash
@@ -77,7 +79,7 @@ provided by this [GitHub Repo](https://github.com/slowkow/allelefrequencies/tree
 ```bash
 python seq2hla/download_imgthla_database.py
 ```
-> **Warning**: This download my take ~1-2 hours. 
+> **Warning**: This download might take ~1-2 hours. 
 
 As an alternative, you can directly download the file `afnd.tsv` from the
 repo using the flag `--fast` (or `-f`):
@@ -86,4 +88,17 @@ python seq2hla/download_allele_freq_database.py --fast
 ```
 
 ## Usage
+Command line interface:
+```bash
+python -m seq2hla.main sequence.fasta
+```
+Using python:
+```python
+from seq2hla import get_most_freq_allele_from_seq
 
+highest_frequency_alleles, mean_frequencies = \
+    get_most_freq_allele_from_seq("sequence.fasta")
+
+for allele in highest_frequency_alleles:
+    print(f"\t{allele}\tMean Frequency: {mean_frequencies[allele]}")
+```
