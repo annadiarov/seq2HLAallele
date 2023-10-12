@@ -1,6 +1,5 @@
 import os
 import re
-import sys
 import subprocess
 from Bio import SeqIO
 from Bio.Blast import NCBIXML
@@ -43,7 +42,7 @@ def run_blastp(query_file, blast_db, blast_result_file, n_cpus=1):
         print(f"An error occurred while executing blast: {e}")
 
 
-def get_most_freq_allele(blastp_result_file):
+def get_most_freq_allele_from_blastp_result(blastp_result_file):
     high_identity_matches = set()
 
     # Parse BLAST results and identify 100% identity matches
@@ -83,18 +82,11 @@ def get_most_freq_allele(blastp_result_file):
     return highest_frequency_alleles, mean_frequencies
 
 
-def main(fasta_file):
+def get_most_freq_allele_from_seq(fasta_file):
     blast_result_file = f"{fasta_file.split('.fasta')[0]}_blastp_result.xml"
     run_blastp(fasta_file, HLA_BLAST_DB, blast_result_file)
     highest_frequency_alleles, mean_frequencies =\
-        get_most_freq_allele(blast_result_file)
+        get_most_freq_allele_from_blastp_result(blast_result_file)
     os.remove(blast_result_file)
     return highest_frequency_alleles, mean_frequencies
 
-
-if __name__ == "__main__":
-    in_fasta = sys.argv[1]
-    high_freq_alleles, mean_freq = main(in_fasta)
-    print("Alleles with the highest mean frequency:")
-    for allele in high_freq_alleles:
-        print(allele, "Mean Frequency:", mean_freq[allele])
