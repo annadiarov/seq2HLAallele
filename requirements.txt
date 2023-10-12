@@ -1,0 +1,6 @@
+# Packages installed using pip
+biopython==1.81
+requests
+pandas
+tqdm
+beautifulsoup4
