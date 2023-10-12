@@ -36,9 +36,11 @@ def merge_hla_seq(output_dir, output_file):
 
 if __name__ == "__main__":
     this_file_path = os.path.dirname(os.path.abspath(__file__))
-    output_dir = os.path.join(this_file_path, '..', 'databases', 'hla_seqs')
+    databases_dir = os.path.join(this_file_path, '..', 'databases')
+    output_dir = os.path.join(databases_dir, 'hla_seqs')
+    os.makedirs(databases_dir, exist_ok=True)
+    os.makedirs(output_dir, exist_ok=True)
     all_hla_seq_file = os.path.join(output_dir, 'all_hla_seq.fasta')
-
     get_hla_seq_latest_version(output_dir)
     merge_hla_seq(output_dir, all_hla_seq_file)
     print('Successfully downloaded and merged HLA sequences! \^o^/')
