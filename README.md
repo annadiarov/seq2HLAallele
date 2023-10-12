@@ -22,13 +22,15 @@ conda create -n seq2hla python=3.11
 conda activate seq2hla
 pip install -r requirements.txt
 ```
-Make sure your computer has installed blast tools. If not, you can install it by:
+Make sure your computer has installed Blast tools. If not, you can install it by:
 ```bash
 sudo apt install ncbi-blast+
 ```
 ### Download databases
-You have to download the HLA sequence database and the HLA frequencies database
-before using the package.
+Before using the package, you have to download the:
+- HLA sequence database 
+- HLA frequencies database
+
 
 The database files should be under the `databases/` folder with the following
 structure:
@@ -49,7 +51,7 @@ structure:
 ```
 
 ##### HLA sequence database
-You can also download the database latest version and create the Blast DB
+You can download the database latest version and create the Blast DB
 automatically with:
 ```bash
 python seq2hla/download_imgthla_database.py
@@ -83,4 +85,5 @@ repo using the flag `--fast` (or `-f`):
 python seq2hla/download_allele_freq_database.py --fast
 ```
 
+## Usage
 
