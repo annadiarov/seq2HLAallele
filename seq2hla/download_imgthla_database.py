@@ -2,8 +2,7 @@ import os
 import requests
 
 MOLECULE_TYPE = 'prot'
-ALL_LOCI = ['A', 'B', 'C', 'DMA', 'DMB', 'DOA', 'DOB', 'DPA1', 'DPB1',
-            'DQA1', 'DQA2', 'DQB1', 'DQB2', 'DRA', 'DRB1', 'DRB345', 'DRB']
+ALL_LOCI = ['A', 'B', 'C', 'DPA1', 'DPB1', 'DQA1', 'DQB1', 'DRB1']
 
 
 def get_hla_seq_latest_version(output_dir):
