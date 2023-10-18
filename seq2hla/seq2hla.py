@@ -65,7 +65,10 @@ def get_most_freq_allele_from_blastp_result(blastp_result_file):
             fields = line.strip().split('\t')
             allele = fields[2]
             if allele in high_identity_matches: # Only consider high identity matches
-                alleles_over_2n = float(fields[5])
+                try:
+                    alleles_over_2n = float(fields[5])
+                except ValueError:
+                    alleles_over_2n = float(fields[5].split('(*)')[0])
                 allele_frequencies[allele].append(alleles_over_2n)
 
     # Calculate mean frequencies among populations
