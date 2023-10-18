@@ -59,6 +59,12 @@ def get_most_freq_allele_from_blastp_result(blastp_result_file):
 
     # Read the frequency data and calculate mean alleles_over_2n
     allele_frequencies = defaultdict(list)
+    if len(high_identity_matches) == 0:
+        print("No high identity matches found in the BLAST results.")
+        return None, None
+    elif len(high_identity_matches) == 1:
+        print("Only one high identity match found in the BLAST results.")
+        return high_identity_matches, None
     with open(FREQ_ALLELES_DB) as afnd_file:
         next(afnd_file)  # Skip the header
         for line in afnd_file:
